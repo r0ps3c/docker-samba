@@ -8,4 +8,4 @@ RUN \
 	rm -rf /var/cache/apk/*
 
 EXPOSE 139 445
-ENTRYPOINT /usr/sbin/smbd -FS --no-process-group < /dev/null
+ENTRYPOINT /usr/sbin/smbd -F --no-process-group < /dev/null
