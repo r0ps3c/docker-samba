@@ -1,8 +1,6 @@
 name: "tagged-release"
 
 on:
-  schedule:
-    - cron: '39 * * * */5'
   push:
     tags:
     - "v*"
