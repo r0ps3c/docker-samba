@@ -1,6 +1,6 @@
 FROM alpine
 RUN \
-	apk -U --no-cache add samba tini
+	apk -U --no-cache add samba
 
 ADD smb.conf /etc/samba
 
