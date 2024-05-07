@@ -19,9 +19,9 @@ jobs:
       - name: Build and export to Docker
         uses: docker/build-push-action@v5
         with:
+          load: true
           tags: ${{ github.repository }}:${{github.sha}}-test
           cache-to: type=gha
-
       - name: Test
         run: |
           docker run --rm --entrypoint /usr/bin/testparm ${{ github.repository }}:${{github.sha}}-test -s
