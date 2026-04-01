@@ -1,0 +1,48 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "dependencyDashboard": false,
+  "minimumReleaseAge": "2 days",
+  "packageRules": [
+    {
+      "description": "Alpine base image updates with 2-day stabilization",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["alpine"],
+      "enabled": true,
+      "minimumReleaseAge": "2 days",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "ignoreTests": false,
+      "pinDigests": true,
+      "matchUpdateTypes": ["minor", "patch", "digest"]
+    },
+    {
+      "description": "Major Alpine updates require manual review",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["alpine"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "reviewers": ["r0ps3c"]
+    },
+    {
+      "description": "GitHub Actions updates with 2-day stabilization",
+      "matchManagers": ["github-actions"],
+      "minimumReleaseAge": "2 days",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "ignoreTests": false,
+      "pinDigests": true
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true
+  },
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "timezone": "UTC"
+}

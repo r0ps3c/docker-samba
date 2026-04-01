@@ -1,0 +1,26 @@
+name: Build and Tag
+
+on:
+  push:
+    branches:
+      - master
+      - stable
+  pull_request:
+    branches:
+      - master
+      - stable
+  workflow_dispatch:
+
+jobs:
+  build-scan-push:
+    uses: r0ps3c/gh-shared-workflows/.github/workflows/docker-build-scan-push.yml@c6ef69d22ab5c31b04437b8c5ee27be005df3d3c # main
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+    with:
+      image-ref: samba:main
+      primary_branch: master
+      version-extract-command: "apk info samba 2>/dev/null | grep '^samba-' | head -1 | cut -d- -f2 | cut -dr -f1"
+      test-command: make test-structure && make test-standalone && make test-integration
+    secrets: inherit
