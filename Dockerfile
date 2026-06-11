@@ -1,6 +1,6 @@
 FROM alpine:3.22
 RUN \
-	apk --no-cache add samba && \
+	apk --no-cache add samba=4.21.9-r1 && \
 	apk upgrade --no-cache && \
 	mkdir -p /etc/samba/smb.conf.d && \
 	touch /etc/samba/smb.conf.d/override.conf

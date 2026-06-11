@@ -36,6 +36,39 @@
       "automergeStrategy": "squash",
       "ignoreTests": false,
       "pinDigests": true
+    },
+    {
+      "description": "APK packages - minor/patch auto-merge with 2-day stabilization",
+      "matchManagers": ["regex"],
+      "matchDatasources": ["repology"],
+      "minimumReleaseAge": "2 days",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "ignoreTests": false,
+      "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "description": "APK packages - major updates require manual review",
+      "matchManagers": ["regex"],
+      "matchDatasources": ["repology"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "reviewers": ["r0ps3c"]
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Track Samba APK version in Dockerfile, keyed to the actual Alpine version in use",
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": [
+        "FROM alpine:(?<alpineMajor>[0-9]+)\\.(?<alpineMinor>[0-9]+)[\\s\\S]*?apk[^\\n]*samba=(?<currentValue>[0-9][0-9.]*)-r[0-9]+"
+      ],
+      "datasourceTemplate": "repology",
+      "depNameTemplate": "samba",
+      "versioningTemplate": "loose",
+      "lookupNameTemplate": "alpine_{{alpineMajor}}_{{alpineMinor}}/samba"
     }
   ],
   "vulnerabilityAlerts": {
