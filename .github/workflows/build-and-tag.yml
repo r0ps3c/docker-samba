@@ -5,11 +5,11 @@ on:
     - cron: '0 4 * * 1'  # Weekly Monday 04:00 UTC
   push:
     branches:
-      - master
+      - main
       - stable
   pull_request:
     branches:
-      - master
+      - main
       - stable
   workflow_dispatch:
 
