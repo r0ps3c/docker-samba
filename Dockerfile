@@ -1,4 +1,4 @@
-FROM alpine:3.22
+FROM alpine:3.24
 RUN \
 	apk --no-cache add samba=4.21.9-r1 && \
 	apk upgrade --no-cache && \
